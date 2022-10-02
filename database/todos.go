@@ -66,7 +66,7 @@ func (c *TodoClient) Update(id string, update interface{}) (models.TodoUpdate, e
 		return result, nil
 	}
 
-	res, err := c.Col.UpdateOne(c.Ctx, bson.M{"_id": _id}, bson.M{"&set": change})
+	res, err := c.Col.UpdateOne(c.Ctx, bson.M{"_id": _id}, bson.M{"$set": change})
 	if err != nil {
 		return result, err
 	}
