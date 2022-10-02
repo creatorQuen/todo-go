@@ -1,0 +1,9 @@
+docker compose up -d
+
+go mod init todo-go
+go get go.mongodb.org/mongo-driver
+go get github.com/spf13/viper
+go get github.com/stretchr/testify
+go get -u github.com/gorilla/mux
+
+docker compose up --build
