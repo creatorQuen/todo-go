@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"net/http"
 	"net/http/httptest"
@@ -87,8 +87,10 @@ func TestDeleteTodo(t *testing.T) {
 			req, _ := http.NewRequest("DELETE", "/todos/"+test.id, nil)
 			rec := httptest.NewRecorder()
 
-			r := mux.NewRouter()
-			r.HandleFunc("/todos/{id}", DeleteTodo(client))
+			//r := mux.NewRouter()
+			//r.HandleFunc("/todos/{id}", DeleteTodo(client))
+			r := gin.Default()
+			r.DELETE("/todos/:id", DeleteTodo(client))
 			r.ServeHTTP(rec, req)
 
 			if test.expectedCode == 200 {

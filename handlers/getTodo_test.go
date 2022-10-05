@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"net/http"
 	"net/http/httptest"
@@ -86,8 +86,10 @@ func TestGetTodo(t *testing.T) {
 			req, _ := http.NewRequest("GET", "/todos/"+test.id, nil)
 			rec := httptest.NewRecorder()
 
-			r := mux.NewRouter()
-			r.HandleFunc("/todos/{id}", GetTodo(client))
+			//r := mux.NewRouter()
+			//r.HandleFunc("/todos/{id}", GetTodo(client))
+			r := gin.Default()
+			r.GET("/todos/:id", GetTodo(client))
 			r.ServeHTTP(rec, req)
 
 			if test.expectedCode == 200 {

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/mock"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"net/http"
@@ -100,8 +100,10 @@ func TestUpdateTodo(t *testing.T) {
 			req, _ := http.NewRequest("PATCH", "/todos/"+test.id, strings.NewReader(test.payload))
 			rec := httptest.NewRecorder()
 
-			r := mux.NewRouter()
-			r.HandleFunc("/todos/{id}", UpdateTodo(client))
+			//r := mux.NewRouter()
+			//r.HandleFunc("/todos/{id}", UpdateTodo(client))
+			r := gin.Default()
+			r.PATCH("/todos/:id", UpdateTodo(client))
 			r.ServeHTTP(rec, req)
 
 			if test.expectedCode == 200 {

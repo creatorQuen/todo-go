@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/mock"
 	"net/http"
 	"net/http/httptest"
@@ -78,11 +78,13 @@ func TestSearchTodos(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			client.On("Search", mock.Anything).Return([]models.Todo{}, nil)
 
-			req, _ := http.NewRequest("GET", "/todos/"+test.payload, nil)
+			req, _ := http.NewRequest("GET", "/todos?q="+test.payload, nil)
 			rec := httptest.NewRecorder()
 
-			r := mux.NewRouter()
-			r.HandleFunc("/todos/{id}", SearchTodos(client))
+			//r := mux.NewRouter()
+			//r.HandleFunc("/todos", SearchTodos(client))
+			r := gin.Default()
+			r.GET("/todos", SearchTodos(client))
 			r.ServeHTTP(rec, req)
 
 			if test.expectedCode == 200 {

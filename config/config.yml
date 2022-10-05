@@ -1,4 +1,5 @@
 environment: dev
+token: ABCDEFGH
 mongo:
   server: mongodb://mongo:27017
   database: Mgo

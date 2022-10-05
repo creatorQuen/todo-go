@@ -4,6 +4,7 @@ import "github.com/spf13/viper"
 
 type Configuration struct {
 	Environment string
+	Token       string
 	Mongo       MongoConfiguration
 }
 

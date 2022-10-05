@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/mock"
 	"net/http"
 	"net/http/httptest"
@@ -91,8 +92,12 @@ func TestInsertTodo(t *testing.T) {
 
 			req, _ := http.NewRequest("POST", "/todos", strings.NewReader(test.payload))
 			rec := httptest.NewRecorder()
-			h := InsertTodo(client)
-			h.ServeHTTP(rec, req)
+			//h := InsertTodo(client)
+			//h.ServeHTTP(rec, req)
+
+			r := gin.Default()
+			r.POST("/todos", InsertTodo(client))
+			r.ServeHTTP(rec, req)
 
 			if test.expectedCode == 200 {
 				client.AssertExpectations(t)
