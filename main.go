@@ -38,6 +38,9 @@ func main() {
 		todos.PATCH("/:id", handlers.UpdateTodo(client))
 		todos.DELETE("/:id", handlers.DeleteTodo(client))
 	}
+
+	r.POST("graphql", handlers.GraphqlTodos(client))
+
 	r.Run(":8080")
 }
 

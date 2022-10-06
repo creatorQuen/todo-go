@@ -14,3 +14,4 @@ go test -v ./... -run ^TestUpdateTodo$
 
 go get -u github.com/gin-gonic/gin
 
+go get github.com/graphql-go/graphql
